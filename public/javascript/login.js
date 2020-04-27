@@ -27,32 +27,32 @@ class Login extends HTMLElement {
         mobileview.innerHTML = "";
 
         // create loading spinner first
-        var element = document.createElement('loading-spinner-element');
-        element.setAttribute("status", "Creating account...")
-        mobileview.appendChild(element)
+        // var element = document.createElement('loading-spinner-element');
+        // element.setAttribute("status", "Creating account...")
+        // mobileview.appendChild(element)
+        this.createAccountView(firstname, surname)
+        // createAccountAppId(firstname, surname, password, email, (json) => {
+        //     console.log(json)
+        //     if (json.status == "user created successfully") {
 
-        createAccountAppId(firstname, surname, password, email, (json) => {
-            console.log(json)
-            if (json.status == "user created successfully") {
-
-                element.setAttribute("status", "Logging in...")
-                let usernamepassword = firstname + "" + surname
-                loginWithAppId(usernamepassword, usernamepassword, (jsonWithTokens) => {
-                    // when creation of account
-                    // and login complete, create the profile
-                    element.setAttribute("status", "Creating user profile...")
-                    createProfile(jsonWithTokens.access_token, success => {
-                        // then show account view
-                        if (success) {
-                            this.createAccountView(firstname, surname)
-                        }
-                        // else edge case when failed to create user profile
-                    })
-                    // edge case when unable to sign in
-                })
-            }
-            // edge case when failed to register with app id
-        })
+        //         element.setAttribute("status", "Logging in...")
+        //         let usernamepassword = firstname + "" + surname
+        //         loginWithAppId(usernamepassword, usernamepassword, (jsonWithTokens) => {
+        //             // when creation of account
+        //             // and login complete, create the profile
+        //             element.setAttribute("status", "Creating user profile...")
+        //             createProfile(jsonWithTokens.access_token, success => {
+        //                 // then show account view
+        //                 if (success) {
+        //                     this.createAccountView(firstname, surname)
+        //                 }
+        //                 // else edge case when failed to create user profile
+        //             })
+        //             // edge case when unable to sign in
+        //         })
+        //     }
+        //     // edge case when failed to register with app id
+        // })
     }
 
     createAccountView(firstname, surname) {

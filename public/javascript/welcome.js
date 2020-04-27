@@ -32,17 +32,17 @@ class Welcome extends HTMLElement {
         let selectUserInput = sr.getElementById("usernameselect")
         let signinButton = sr.getElementById("signin")
 
-        getAllUsers((users) => {
-            users.forEach(user => {
-                var option = document.createElement("option");
-                option.text = user
-                selectUserInput.add(option)
-            });
-        })
+        // getAllUsers((users) => {
+        //     users.forEach(user => {
+        //         var option = document.createElement("option");
+        //         option.text = user
+        //         selectUserInput.add(option)
+        //     });
+        // })
 
-        signinButton.addEventListener("click", e => {
-            this.signin(selectUserInput.value, selectUserInput.value)
-        })
+        // signinButton.addEventListener("click", e => {
+        //     this.signin(selectUserInput.value, selectUserInput.value)
+        // })
     }
 
     signin(username, password) {

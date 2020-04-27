@@ -25,7 +25,8 @@ class EventList extends HTMLElement {
 
 
 
-            const date = new Date(event.startTime)
+            // const date = new Date(event.startTime)
+            const date = new Date()
             const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
             const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date)
             const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date)
@@ -89,81 +90,81 @@ class EventList extends HTMLElement {
 
         switch (this.id) {
             case 'UPCOMINGEVENTS':
-                let arrayOfEvents = getStoredEvents(loyalty.parseJwt(loyalty.getCookie('id_token')).sub)
+                // let arrayOfEvents = getStoredEvents(loyalty.parseJwt(loyalty.getCookie('id_token')).sub)
 
-                if (arrayOfEvents == null) arrayOfEvents = []
-                // sort
-                let sortedArray = arrayOfEvents.sort((a, b) => (new Date(a.startTime) > new Date(b.startTime)) ? 1 : -1)
+                // if (arrayOfEvents == null) arrayOfEvents = []
+                // // sort
+                // let sortedArray = arrayOfEvents.sort((a, b) => (new Date(a.startTime) > new Date(b.startTime)) ? 1 : -1)
 
-                this.showEvents(sortedArray)
+                // this.showEvents(sortedArray)
                 break
             case 'ALLEVENTS':
-                getUserEvents(loyalty.getCookie('access_token'), (err, checkedInUserEvents) => {
-                    getEvents(loyalty.getCookie('access_token'), (err, events) => {
-                        let eventsOfArray = []
-                        let storedEvents = getStoredEvents(loyalty.parseJwt(loyalty.getCookie('id_token')).sub)
-                        // map array into eventIds only
-                        if (storedEvents != null) {
-                            storedEvents = storedEvents.map(e => e.eventId)
-                        } else {
-                            storedEvents = []
-                        }
-                        for (var i in events) {
-                            // dont show events that user has checked in already or stored already
-                            if (!checkedInUserEvents.includes(i) && !storedEvents.includes(i)) {
-                                // add event id in body
-                                events[i].eventId = i
-                                eventsOfArray.push(events[i])
-                            }
-                        }
+                // getUserEvents(loyalty.getCookie('access_token'), (err, checkedInUserEvents) => {
+                //     getEvents(loyalty.getCookie('access_token'), (err, events) => {
+                //         let eventsOfArray = []
+                //         let storedEvents = getStoredEvents(loyalty.parseJwt(loyalty.getCookie('id_token')).sub)
+                //         // map array into eventIds only
+                //         if (storedEvents != null) {
+                //             storedEvents = storedEvents.map(e => e.eventId)
+                //         } else {
+                //             storedEvents = []
+                //         }
+                //         for (var i in events) {
+                //             // dont show events that user has checked in already or stored already
+                //             if (!checkedInUserEvents.includes(i) && !storedEvents.includes(i)) {
+                //                 // add event id in body
+                //                 events[i].eventId = i
+                //                 eventsOfArray.push(events[i])
+                //             }
+                //         }
 
-                        let sortedArray = eventsOfArray.sort((a, b) => (new Date(a.startTime) > new Date(b.startTime)) ? 1 : -1)
-                        // console.log(sortedArray)
-                        this.showEvents(sortedArray)
-                    })
-                })
+                //         let sortedArray = eventsOfArray.sort((a, b) => (new Date(a.startTime) > new Date(b.startTime)) ? 1 : -1)
+                //         // console.log(sortedArray)
+                //         this.showEvents(sortedArray)
+                //     })
+                // })
                 break
             case 'PASTEVENTS':
-                getUserEventsWithData(loyalty.getCookie('access_token'), (err, events) => {
-                    let eventsOfArray = []
+                // getUserEventsWithData(loyalty.getCookie('access_token'), (err, events) => {
+                //     let eventsOfArray = []
 
-                    for (var i in events ) {
-                        // add event id in body
-                        events[i].eventId = i
-                        eventsOfArray.push(events[i])
-                    }
+                //     for (var i in events ) {
+                //         // add event id in body
+                //         events[i].eventId = i
+                //         eventsOfArray.push(events[i])
+                //     }
 
-                    let sortedArray = eventsOfArray.sort((a, b) => (new Date(a.startTime) > new Date(b.startTime)) ? 1 : -1)
-                    this.showEvents(sortedArray)
-                })
+                //     let sortedArray = eventsOfArray.sort((a, b) => (new Date(a.startTime) > new Date(b.startTime)) ? 1 : -1)
+                //     this.showEvents(sortedArray)
+                // })
                 break
             default:
                 break
         }
 
-        // var sampledata = [{
-        //     "title": "CITYJSCONF",
-        //     "date": "MARCH 27, 2020",
-        //     "points": 15,
-        //     "address": "REGENT STREET THEATRE, LONDON"
-        // }, {
-        //     "title": "BINARY DISTRICT ZERO PROOFS WORKSHOP",
-        //     "date": "JUNE 12, 2020",
-        //     "points": 15,
-        //     "address": "TRUMAN BREWERY, BRICK LANE, E1"
-        // }, {
-        //     "title": "CITYJSCONF",
-        //     "date": "MARCH 27, 2020",
-        //     "points": 15,
-        //     "address": "REGENT STREET THEATRE, LONDON"
-        // }, {
-        //     "title": "BINARY DISTRICT ZERO PROOFS WORKSHOP",
-        //     "date": "JUNE 12, 2020",
-        //     "points": 15,
-        //     "address": "TRUMAN BREWERY, BRICK LANE, E1"
-        // }]
+        var sampledata = [{
+            "eventName": "CITYJSCONF",
+            "date": "MARCH 27, 2020",
+            "pointValue": 15,
+            "eventLocation": "REGENT STREET THEATRE, LONDON"
+        }, {
+            "eventName": "BINARY DISTRICT ZERO PROOFS WORKSHOP",
+            "date": "JUNE 12, 2020",
+            "pointValue": 15,
+            "eventLocation": "TRUMAN BREWERY, BRICK LANE, E1"
+        }, {
+            "eventName": "CITYJSCONF",
+            "date": "MARCH 27, 2020",
+            "pointValue": 15,
+            "eventLocation": "REGENT STREET THEATRE, LONDON"
+        }, {
+            "eventName": "BINARY DISTRICT ZERO PROOFS WORKSHOP",
+            "date": "JUNE 12, 2020",
+            "pointValue": 15,
+            "eventLocation": "TRUMAN BREWERY, BRICK LANE, E1"
+        }]
 
-        // this.showEvents(sampledata);
+        this.showEvents(sampledata);
     }
 }
 

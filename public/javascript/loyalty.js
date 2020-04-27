@@ -6,29 +6,29 @@ class Loyalty {
 
         // if cookie exists - then user is logged in
         //  navigate to account section
-        if (this.getCookie('access_token') != "" && this.getCookie('id_token') != "") {
-            let id_object = this.parseJwt(this.getCookie('id_token'))
-            console.log(id_object)
+        // if (this.getCookie('access_token') != "" && this.getCookie('id_token') != "") {
+        //     let id_object = this.parseJwt(this.getCookie('id_token'))
+        //     console.log(id_object)
 
-            var accountinfo = {
-                firstname: id_object.given_name,
-                surname: id_object.family_name
-            }
+        //     var accountinfo = {
+        //         firstname: id_object.given_name,
+        //         surname: id_object.family_name
+        //     }
 
-            var fullname = accountinfo.firstname + ' ' + accountinfo.surname
+        //     var fullname = accountinfo.firstname + ' ' + accountinfo.surname
 
-            var mobileview = document.getElementById("mobileview");
-            mobileview.innerHTML = "";
+        //     var mobileview = document.getElementById("mobileview");
+        //     mobileview.innerHTML = "";
 
-            let element = document.createElement('account-element')
-            element.setAttribute('name', fullname)
-            mobileview.appendChild(element)
+        //     let element = document.createElement('account-element')
+        //     element.setAttribute('name', fullname)
+        //     mobileview.appendChild(element)
 
-            localStorage.setItem("loyaltyname", fullname);
+        //     localStorage.setItem("loyaltyname", fullname);
 
-            var nav = document.getElementById("mobilenavigation");
-            nav.style.display = "flex";
-        }
+        //     var nav = document.getElementById("mobilenavigation");
+        //     nav.style.display = "flex";
+        // }
     }
 
     signup() {
@@ -38,15 +38,18 @@ class Loyalty {
         mobileview.innerHTML = "";
 
         var element = document.createElement('login-element');
-
-        getRandomUser((firstname, surname, password, email) => {
+        let firstname = "Paul"
+        let surname = "McCartney"
+        let password = "*****"
+        let email = "exampel@email.org"
+        // getRandomUser((firstname, surname, password, email) => {
             element.setAttribute('firstname', firstname);
             element.setAttribute('surname', surname);
             element.setAttribute('password', password);
             element.setAttribute('username', email);
 
             mobileview.appendChild(element);
-        })
+        // })
 
         /* same as mobileview.innerHTML =
         '<login-element firstname="John surname="Lennon" password="######" username="john@email.com"></login-element>' */

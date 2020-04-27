@@ -37,7 +37,7 @@ class Account extends HTMLElement {
 
         let deleteButton = sr.getElementById("deleteAccountButton")
         deleteButton.addEventListener("click", e => {
-            this.delete();
+            // this.delete();
         })
     }
 
@@ -108,26 +108,26 @@ class Account extends HTMLElement {
         this.nameelement = sr.getElementById('name');
         this.nameelement.innerHTML = this.name;
 
-        getUserStats(loyalty.getCookie('access_token'), (err, eventCount, pointsEarned) => {
-            // if user is not registered (user profile is not in database)
-            // create one for user
-            if (err == 'User is not registered') {
-                let mobileview = document.getElementById("mobileview");
-                mobileview.innerHTML = "";
-                let element = document.createElement('loading-spinner-element');
-                element.setAttribute("status", "User is marked for deletion...")
-                mobileview.appendChild(element)
+        // getUserStats(loyalty.getCookie('access_token'), (err, eventCount, pointsEarned) => {
+        //     // if user is not registered (user profile is not in database)
+        //     // create one for user
+        //     if (err == 'User is not registered') {
+        //         let mobileview = document.getElementById("mobileview");
+        //         mobileview.innerHTML = "";
+        //         let element = document.createElement('loading-spinner-element');
+        //         element.setAttribute("status", "User is marked for deletion...")
+        //         mobileview.appendChild(element)
 
-                setTimeout(() => {
-                    element.setAttribute("status", "Logging out...")
-                    setTimeout(() => {
-                        this.logout()
-                    }, 2500)
-                }, 2000)
-            }
-            if (eventCount != null) customElement.setAttribute('events', eventCount)
-            if (pointsEarned != null) customElement.setAttribute('points', pointsEarned)
-        })
+        //         setTimeout(() => {
+        //             element.setAttribute("status", "Logging out...")
+        //             setTimeout(() => {
+        //                 this.logout()
+        //             }, 2500)
+        //         }, 2000)
+        //     }
+        //     if (eventCount != null) customElement.setAttribute('events', eventCount)
+        //     if (pointsEarned != null) customElement.setAttribute('points', pointsEarned)
+        // })
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
